@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище MTS_dbModelContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="abonents">
+      <EntityTypeMapping TypeName="MTS_dbModel.abonents">
+        <MappingFragment StoreEntitySet="abonents">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="lName" ColumnName="lName" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="number" ColumnName="number" />
+          <ScalarProperty Name="idTarif" ColumnName="idTarif" />
+          <ScalarProperty Name="avaluable" ColumnName="avaluable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="MTS_dbModel.Admins">
+        <MappingFragment StoreEntitySet="Admins">
+          <ScalarProperty Name="idAdmin" ColumnName="idAdmin" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="lName" ColumnName="lName" />
+          <ScalarProperty Name="login" ColumnName="login" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Auth">
+      <EntityTypeMapping TypeName="MTS_dbModel.Auth">
+        <MappingFragment StoreEntitySet="Auth">
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="idRole" ColumnName="idRole" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="MTS_dbModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="idRole" ColumnName="idRole" />
+          <ScalarProperty Name="role1" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="MTS_dbModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tarifs">
+      <EntityTypeMapping TypeName="MTS_dbModel.tarifs">
+        <MappingFragment StoreEntitySet="tarifs">
+          <ScalarProperty Name="idTarif" ColumnName="idTarif" />
+          <ScalarProperty Name="nameTarif" ColumnName="nameTarif" />
+          <ScalarProperty Name="count" ColumnName="count" />
+          <ScalarProperty Name="minuts" ColumnName="minuts" />
+          <ScalarProperty Name="sms" ColumnName="sms" />
+          <ScalarProperty Name="gb" ColumnName="gb" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

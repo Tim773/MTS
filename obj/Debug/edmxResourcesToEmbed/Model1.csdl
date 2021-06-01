@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MTS_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="abonents">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idTarif" Type="Int32" Nullable="false" />
+    <Property Name="avaluable" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Auth" Relationship="Self.FK_abonents_Auth" FromRole="abonents" ToRole="Auth" />
+    <NavigationProperty Name="tarifs" Relationship="Self.FK_abonents_tarifs" FromRole="abonents" ToRole="tarifs" />
+  </EntityType>
+  <EntityType Name="Admins">
+    <Key>
+      <PropertyRef Name="idAdmin" />
+    </Key>
+    <Property Name="idAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Auth" Relationship="Self.FK_Admins_Auth" FromRole="Admins" ToRole="Auth" />
+  </EntityType>
+  <EntityType Name="Auth">
+    <Key>
+      <PropertyRef Name="login" />
+    </Key>
+    <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idRole" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="abonents" Relationship="Self.FK_abonents_Auth" FromRole="Auth" ToRole="abonents" />
+    <NavigationProperty Name="Admins" Relationship="Self.FK_Admins_Auth" FromRole="Auth" ToRole="Admins" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_Auth_Role" FromRole="Auth" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="idRole" />
+    </Key>
+    <Property Name="idRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="role1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Auth" Relationship="Self.FK_Auth_Role" FromRole="Role" ToRole="Auth" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tarifs">
+    <Key>
+      <PropertyRef Name="idTarif" />
+    </Key>
+    <Property Name="idTarif" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nameTarif" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="count" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="minuts" Type="Int32" Nullable="false" />
+    <Property Name="sms" Type="Int32" Nullable="false" />
+    <Property Name="gb" Type="Double" Nullable="false" />
+    <NavigationProperty Name="abonents" Relationship="Self.FK_abonents_tarifs" FromRole="tarifs" ToRole="abonents" />
+  </EntityType>
+  <Association Name="FK_abonents_Auth">
+    <End Role="Auth" Type="Self.Auth" Multiplicity="1" />
+    <End Role="abonents" Type="Self.abonents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Auth">
+        <PropertyRef Name="login" />
+      </Principal>
+      <Dependent Role="abonents">
+        <PropertyRef Name="login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_abonents_tarifs">
+    <End Role="tarifs" Type="Self.tarifs" Multiplicity="1" />
+    <End Role="abonents" Type="Self.abonents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tarifs">
+        <PropertyRef Name="idTarif" />
+      </Principal>
+      <Dependent Role="abonents">
+        <PropertyRef Name="idTarif" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Admins_Auth">
+    <End Role="Auth" Type="Self.Auth" Multiplicity="1" />
+    <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Auth">
+        <PropertyRef Name="login" />
+      </Principal>
+      <Dependent Role="Admins">
+        <PropertyRef Name="login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Auth_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Auth" Type="Self.Auth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="idRole" />
+      </Principal>
+      <Dependent Role="Auth">
+        <PropertyRef Name="idRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="abonents" EntityType="Self.abonents" />
+    <EntitySet Name="Admins" EntityType="Self.Admins" />
+    <EntitySet Name="Auth" EntityType="Self.Auth" />
+    <EntitySet Name="Role" EntityType="Self.Role" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="tarifs" EntityType="Self.tarifs" />
+    <AssociationSet Name="FK_abonents_Auth" Association="Self.FK_abonents_Auth">
+      <End Role="Auth" EntitySet="Auth" />
+      <End Role="abonents" EntitySet="abonents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_abonents_tarifs" Association="Self.FK_abonents_tarifs">
+      <End Role="tarifs" EntitySet="tarifs" />
+      <End Role="abonents" EntitySet="abonents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Admins_Auth" Association="Self.FK_Admins_Auth">
+      <End Role="Auth" EntitySet="Auth" />
+      <End Role="Admins" EntitySet="Admins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Auth_Role" Association="Self.FK_Auth_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Auth" EntitySet="Auth" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c3aa7b52680146f990507d32c472f9e6" Name="Diagram1" ZoomLevel="125">
+        <EntityTypeShape EntityType="MTS_dbModel.abonents" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTS_dbModel.Admins" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTS_dbModel.Auth" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTS_dbModel.Role" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTS_dbModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTS_dbModel.tarifs" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="MTS_dbModel.FK_abonents_Auth" ManuallyRouted="false" />
+        <AssociationConnector Association="MTS_dbModel.FK_abonents_tarifs" ManuallyRouted="false" />
+        <AssociationConnector Association="MTS_dbModel.FK_Admins_Auth" ManuallyRouted="false" />
+        <AssociationConnector Association="MTS_dbModel.FK_Auth_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
