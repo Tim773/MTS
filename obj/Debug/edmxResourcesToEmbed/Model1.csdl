@@ -64,6 +64,7 @@
     <Property Name="sms" Type="Int32" Nullable="false" />
     <Property Name="gb" Type="Double" Nullable="false" />
     <NavigationProperty Name="abonents" Relationship="Self.FK_abonents_tarifs" FromRole="tarifs" ToRole="abonents" />
+    <Property Name="avaluable" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_abonents_Auth">
     <End Role="Auth" Type="Self.Auth" Multiplicity="1" />

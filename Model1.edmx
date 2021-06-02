@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище MTS_dbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище MTS_dbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="abonents">
           <Key>
             <PropertyRef Name="id" />
@@ -61,6 +61,7 @@
           <Property Name="minuts" Type="int" Nullable="false" />
           <Property Name="sms" Type="int" Nullable="false" />
           <Property Name="gb" Type="float" Nullable="false" />
+          <Property Name="avaluable" Type="nvarchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <Association Name="FK_abonents_Auth">
           <End Role="Auth" Type="Self.Auth" Multiplicity="1" />
@@ -134,8 +135,7 @@
             <End Role="Auth" EntitySet="Auth" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MTS_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -203,6 +203,7 @@
           <Property Name="sms" Type="Int32" Nullable="false" />
           <Property Name="gb" Type="Double" Nullable="false" />
           <NavigationProperty Name="abonents" Relationship="Self.FK_abonents_tarifs" FromRole="tarifs" ToRole="abonents" />
+          <Property Name="avaluable" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_abonents_Auth">
           <End Role="Auth" Type="Self.Auth" Multiplicity="1" />
@@ -336,6 +337,7 @@
           <EntitySetMapping Name="tarifs">
             <EntityTypeMapping TypeName="MTS_dbModel.tarifs">
               <MappingFragment StoreEntitySet="tarifs">
+                <ScalarProperty Name="avaluable" ColumnName="avaluable" />
                 <ScalarProperty Name="idTarif" ColumnName="idTarif" />
                 <ScalarProperty Name="nameTarif" ColumnName="nameTarif" />
                 <ScalarProperty Name="count" ColumnName="count" />

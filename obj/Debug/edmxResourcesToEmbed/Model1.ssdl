@@ -56,6 +56,7 @@
     <Property Name="minuts" Type="int" Nullable="false" />
     <Property Name="sms" Type="int" Nullable="false" />
     <Property Name="gb" Type="float" Nullable="false" />
+    <Property Name="avaluable" Type="nvarchar" MaxLength="1" Nullable="false" />
   </EntityType>
   <Association Name="FK_abonents_Auth">
     <End Role="Auth" Type="Self.Auth" Multiplicity="1" />

@@ -29,4 +29,8 @@ C:\Users\Тимошка\source\repos\MTS\obj\Debug\windows\adminWin.g.cs
 C:\Users\Тимошка\source\repos\MTS\obj\Debug\windows\adminWin.baml
 C:\Users\Тимошка\source\repos\MTS\obj\Debug\windows\EditWin.g.cs
 C:\Users\Тимошка\source\repos\MTS\obj\Debug\windows\EditWin.baml
+C:\Users\Тимошка\source\repos\MTS\obj\Debug\windows\addTarifWin.g.cs
+C:\Users\Тимошка\source\repos\MTS\obj\Debug\windows\addTarifWin.baml
+C:\Users\Тимошка\source\repos\MTS\obj\Debug\windows\editTarifWin.g.cs
+C:\Users\Тимошка\source\repos\MTS\obj\Debug\windows\editTarifWin.baml
 C:\Users\Тимошка\source\repos\MTS\obj\Debug\MTS.csprojAssemblyReference.cache

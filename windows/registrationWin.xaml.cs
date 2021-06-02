@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static MTS.AppData;
 using static MTS.ValidationClass;
-using static MTS.SuppClass;
 
 namespace MTS.windows
 {
@@ -26,11 +25,12 @@ namespace MTS.windows
         {
             InitializeComponent();
         }
+        public int AdmUse { get; set; } = 0;
 
         private void cbTarif_Loaded(object sender, RoutedEventArgs e)
         {
             var tarif = entities.tarifs;
-            cbTarif.ItemsSource = tarif.ToList();
+            cbTarif.ItemsSource = tarif.ToList().Where(i => i.avaluable == "1");
         }
 
         private void regSub_Click(object sender, RoutedEventArgs e)
@@ -41,12 +41,12 @@ namespace MTS.windows
             var number = entities.abonents.ToList().
                         Where(i => i.number == tbNumber.Text).
                         FirstOrDefault();
-            if (tbLname.Text == null ||
-                tbName.Text == null ||
-                tbLogin.Text == null ||
-                tbNumber.Text == null ||
-               pbPassword.Password == null ||
-               pbChekPassword.Password == null ||
+            if (tbLname.Text == string.Empty ||
+                tbName.Text == string.Empty ||
+                tbLogin.Text == string.Empty ||
+                pbPassword.Password == string.Empty||
+                tbNumber.Text == string.Empty ||               
+               pbChekPassword.Password == string.Empty ||
                cbTarif.SelectedItem == null)
             {
                 MessageBox.Show("Вы указали не все данные", "Регистрация абоента", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -98,12 +98,57 @@ namespace MTS.windows
                     }
                     ); ;
 
+                    if (AdmUse == 0)
+                    {
+                        pbPassword.Password = string.Empty;
+                        tbLogin.Text = string.Empty;
+                        pbChekPassword.Password = string.Empty;
+                        tbLname.Text = string.Empty;
+                        tbName.Text = string.Empty;
+                        tbNumber.Text = string.Empty;
+                        cbTarif.SelectedIndex = -1;
+                        entities.SaveChanges();
+                        MessageBox.Show("Регистрация нового абонента прошла успешно", "Регистрация абоента", MessageBoxButton.OK);
+                        MainWindow mainWindow = new MainWindow();
+                        Close();
+                        mainWindow.ShowDialog();
+                    }
+                    else if (AdmUse == 1)
+                    {
+                        pbPassword.Password = string.Empty;
+                        tbLogin.Text = string.Empty;
+                        pbChekPassword.Password = string.Empty;
+                        tbLname.Text = string.Empty;
+                        tbName.Text = string.Empty;
+                        tbNumber.Text = string.Empty;
+                        cbTarif.SelectedIndex = -1;
+                        entities.SaveChanges();
+                        MessageBox.Show("Регистрация нового абонента прошла успешно", "Регистрация абоента", MessageBoxButton.OK);
+                        adminWin adminWin = new adminWin();
+                        Close();
+                        adminWin.ShowDialog();
+                    }
                 }
                 catch (Exception err)
                 {
                     MessageBox.Show(err.Message);
-                    throw;
+                   
                 }
+
+            }
+        }
+        private void Close_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Вы действительно хотите выйти из приложения?", "Выход", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                Close();
+            }
+        }
+
+        private void regCan_Click(object sender, RoutedEventArgs e)
+        {
+            if (AdmUse == 0)
+            {
                 pbPassword.Password = string.Empty;
                 tbLogin.Text = string.Empty;
                 pbChekPassword.Password = string.Empty;
@@ -111,24 +156,28 @@ namespace MTS.windows
                 tbName.Text = string.Empty;
                 tbNumber.Text = string.Empty;
                 cbTarif.SelectedIndex = -1;
-                entities.SaveChanges();
-                MessageBox.Show("Регистрация нового абонента прошла успешно", "Регистрация абоента", MessageBoxButton.OK);
-                Hide();                
+                MainWindow mainWindow = new MainWindow();
+                Close();
                 mainWindow.ShowDialog();
             }
+            else if (AdmUse == 1)
+            {
+                pbPassword.Password = string.Empty;
+                tbLogin.Text = string.Empty;
+                pbChekPassword.Password = string.Empty;
+                tbLname.Text = string.Empty;
+                tbName.Text = string.Empty;
+                tbNumber.Text = string.Empty;
+                cbTarif.SelectedIndex = -1;
+                AdmUse = 0;
+                adminWin adminWin = new adminWin();
+                Close();
+                adminWin.ShowDialog();
+            }
         }
-
-        private void regCan_Click(object sender, RoutedEventArgs e)
+        public void AdminUpdate()
         {
-            pbPassword.Password = string.Empty;
-            tbLogin.Text = string.Empty;
-            pbChekPassword.Password = string.Empty;
-            tbLname.Text = string.Empty;
-            tbName.Text = string.Empty;
-            tbNumber.Text = string.Empty;
-            cbTarif.SelectedIndex = -1;
-            Hide();            
-            mainWindow.ShowDialog();
+            AdmUse = 1;
         }
     }
 }

@@ -9,15 +9,26 @@
         Height="400" 
         Width="350" 
         ResizeMode="NoResize" 
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
     <Grid>
         <ScrollViewer>
             <StackPanel>
-
+                <Button Style="{StaticResource btnStyle}"
+                        x:Name="Close"
+                        Content="X"
+                        Width="20"
+                        Height="20"
+                        Margin=" 5"
+                        Click="Close_Click"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                        />
                 <Image Source="/mts_logo.jpg"
                            Width="130"
                            HorizontalAlignment="Center"/>
                 <TextBlock Text="Регистрация нового абонента сети"
+                           x:Name="tbTit"
                            FontSize="25"
                            TextAlignment="Center"
                            TextWrapping="Wrap"
@@ -28,9 +39,7 @@
                     Header="Заполните все поля и выберите тариф"                          
                     Margin="15"
                     BorderBrush="Red">
-
                     <StackPanel>
-
                         <TextBlock Text="Имя"
                        FontSize="20"
                        HorizontalAlignment="Center"

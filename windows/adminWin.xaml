@@ -5,64 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MTS.windows"
         mc:Ignorable="d"
-        Title="ClientList" Height="450" Width="600" ResizeMode="NoResize">
+        Title="ClientList"
+        Height="380"
+        Width="700"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"        
+        WindowStyle="None">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
 
-        <WrapPanel HorizontalAlignment="Center" Grid.Row ="0">
+        <WrapPanel HorizontalAlignment="Center" Grid.Row ="0" Margin="68,0,10,0" Width="622">
             <Image Source="/mts_logo.jpg" />
-            <TextBlock Text="Спиок клиентов" 
+            <TextBlock Text="Спиок абонентов" 
                        FontSize="50"
                        Margin="5"
                        Foreground="Red"/>
+            <Button Style="{StaticResource btnStyle}"
+                        x:Name="Close"
+                        Content="X"
+                        Width="20"
+                        Height="20"
+                        Margin="60 5 2 0"
+                        Click="Close_Click"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                        />
         </WrapPanel>
-        <WrapPanel Grid.Row ="1"
+        <StackPanel Grid.Row ="1"
                    Margin="10">
-            <ListView Name="Abonents"
+            <WrapPanel>
+                <ListView Name="Abonents"
                       Visibility="Visible"
-                      ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                      ScrollViewer.VerticalScrollBarVisibility="Visible"
-                      Height="250"
-                      Width="400"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      Height="240"
+                      Width="450"
                       MouseDoubleClick="Abonents_MouseDoubleClick"
-                      Grid.Row="1"
-                      Loaded="Abonents_Loaded">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=id}" Width="auto">ID</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="auto">Имя</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=lName}" Width="auto">Фамилия</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=login}" Width="auto">Логин</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=number}" Width="auto">Номер телефона</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=tarifs.nameTarif}" Width="auto">Тариф</GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-            <ListView Name="Tarifs"
+                      Grid.Row="1">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=id}" Width="auto">ID</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="auto">Имя</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=lName}" Width="auto">Фамилия</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=login}" Width="auto">Логин</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=number}" Width="auto">Номер телефона</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=tarifs.nameTarif}" Width="auto">Тариф</GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView Name="Tarifs"
                       Visibility="Collapsed"
-                      ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                      ScrollViewer.VerticalScrollBarVisibility="Visible"
-                      Height="250"
-                      Width="500"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      Height="240"
+                      Width="450" 
                       MouseDoubleClick="Tarifs_MouseDoubleClick"
-                      Grid.Row="1"
-                      Loaded="Abonents_Loaded">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=idTarif}" Width="auto">ID</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=nameTarif}" Width="auto">Имя тарифа</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=count}" Width="auto">Абонентская плата</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=minutes}" Width="auto">Количество минут</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=sms}" Width="auto">Количество СМС</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=tarifs.gb}" Width="auto">Количество гигабайт</GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-            <GroupBox Header="Вывод"
+                      Grid.Row="1">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=idTarif}" Width="auto">ID</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=nameTarif}" Width="auto">Имя тарифа</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=count}" Width="auto">Абонентская плата</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=minuts}" Width="auto">Кол. минут</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=sms}" Width="auto">Кол. СМС</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=gb}" Width="auto">Кол. гигабайт</GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <StackPanel>
+                    <GroupBox Header="Вывод"
                        FontSize="15"
                     Foreground="red"
                       Margin="5"
@@ -70,31 +84,122 @@
                       Height="65"
                       VerticalAlignment="Top"
                       Width="100">
-                <StackPanel>
-                    <RadioButton Content="Клинты"
-                                 Foreground="Red"/>
-                    <RadioButton Content="Тарифы"
-                                 Foreground="Red"/>
+                        <StackPanel>
+                            <RadioButton Content="Абоненты"
+                                 Foreground="Red"
+                                 IsChecked="True"
+                                 Click="ClientsRadio_Click"
+                                 x:Name="AbonentsRadio"/>
+                            <RadioButton Content="Тарифы" 
+                                 Foreground="Red"
+                                 Click="TarifRadio_Click"
+                                 x:Name="TarifRadio"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox x:Name="GR_BOX"
+                              Margin="25,5,25,5"
+                              Height="auto"
+                              Foreground="red"
+                              BorderBrush="Red"
+                              >
+                        <GroupBox.Header>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="Поиск" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </GroupBox.Header>
+                        <StackPanel Orientation="Vertical">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel x:Name="FamSearch" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                        <Label Content="Фамилия" Foreground="red" />
+                                        <TextBox x:Name="FamSearch1" Style="{StaticResource tbStyle}" Width="100" Margin="0 0 0 10" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="ImySearch" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                        <Label Name="name" Content="Имя" Foreground="red"/>
+                                        <TextBox x:Name="ImySearch1" Margin="0 0 0 10" Style="{StaticResource tbStyle}" Width="100"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="PatrSearch" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                        <Label Name="number"
+                                            Content="Номер" Foreground="red"/>
+                                        <TextBox x:Name="PatrSearch1"
+                                                 Width="100"
+                                                 Margin="0 0 0 10"
+                                                 Style="{StaticResource tbStyle}"/>
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Height="30" Width="auto"
+                                Margin="25 0 25 0">
+                        <Button Content="Поиск"
+                                Style="{StaticResource btnStyle}"
+                                Width="60"
+                                Margin="5"
+                                Click="Search"
+                                HorizontalAlignment="Center"/>
+                        <Button Content="Сброс" 
+                                Style="{StaticResource btnStyle}"
+                                Width="60"
+                                Margin="5"
+                                Click="ResetSearch"
+                                HorizontalAlignment="Center"/>
+                    </StackPanel>
                 </StackPanel>
-            </GroupBox>
-        </WrapPanel>
-        <WrapPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left">
-            <Button x:Name="backList"
+            </WrapPanel>
+            <WrapPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Button x:Name="backList"
                     Style="{StaticResource btnStyle}"
                     Height="25"
-                    Width="120"
-                    Margin="20 10" 
-                    Content="Предыдущий лист"
+                    Width="25"
+                    Margin="0 10" 
+                    Content="&lt;"
                     Click="BackList_Click"                      
-            />
-            <Button x:Name="nextList"
+                />
+                <Button x:Name="nextList"
+                    Style="{StaticResource btnStyle}"
+                    Height="25"
+                    Width="25"
+                    Margin="20 10" 
+                    Content=">"
+                    Click="NextList_Click"/>
+                <Button x:Name="btnDel"
                     Style="{StaticResource btnStyle}"
                     Height="25"
                     Width="120"
                     Margin="20 10" 
-                    Content="Следующий лист"
-                    Click="NextList_Click"                      
-            />
-        </WrapPanel>
+                    Content="Удалить абонента"
+                    Click="btnDel_Click"/>
+                <Button x:Name="btnAdd"
+                    Style="{StaticResource btnStyle}"
+                    Height="25"
+                    Width="120"
+                    Margin="20 10 30 10" 
+                    Content="Добавить абонента"
+                    Click="btnAdd_Click"/>
+                <Button x:Name="Exit"
+                    Style="{StaticResource btnStyle}"
+                    Height="25"
+                    Width="120"
+                    Margin="40 10" 
+                    Content="Выход из уч. записи"
+                    Click="Exit_Click"/>
+            </WrapPanel>
+        </StackPanel>
     </Grid>
 </Window>

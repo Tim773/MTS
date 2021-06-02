@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static MTS.AppData;
-using static MTS.SuppClass;
 
 namespace MTS.windows
 {
@@ -29,12 +28,24 @@ namespace MTS.windows
         private void cbTarif_Loaded(object sender, RoutedEventArgs e)
         {
             var tarif = entities.tarifs;
-            cbTarif.ItemsSource = tarif.ToList();
+            cbTarif.ItemsSource = tarif.ToList().Where(i => i.avaluable == "1");
+        }
+        private void Update()
+        {
+            var tarif = entities.tarifs.ToList().
+                Where(i => i.idTarif == logedAbonent.idTarif && i.avaluable == "1").FirstOrDefault();
+            tbFname.Text = logedAbonent.lName;
+            tbName.Text = logedAbonent.name;
+            tbNumber.Text = logedAbonent.number;
+            tbTarif.Text = tarif.nameTarif;
+            tbMinuts.Text = Convert.ToString(tarif.minuts);
+            tbSMS.Text = Convert.ToString(tarif.sms);
+            tbGB.Text = Convert.ToString(tarif.gb);
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var tarif = entities.tarifs.ToList().
-                Where(i => i.idTarif == logedAbonent.idTarif).FirstOrDefault();
+                Where(i => i.idTarif == logedAbonent.idTarif && i.avaluable == "1").FirstOrDefault();
             tbFname.Text = logedAbonent.lName;
             tbName.Text = logedAbonent.name;
             tbNumber.Text = logedAbonent.number;
@@ -47,8 +58,9 @@ namespace MTS.windows
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
-            SuppClass.mainWindow.ShowDialog();
+            MainWindow mainWindow = new MainWindow();
+            Close();
+            mainWindow.ShowDialog();
 
         }
 
@@ -77,16 +89,24 @@ namespace MTS.windows
                 {
                     user.idTarif = cbTarif.SelectedIndex + 1;
                     entities.SaveChanges();
-                    Close();
+                    Update();
+                    cbTarif.SelectedItem = null;
+
                 }
                 catch (Exception err)
                 {
                     MessageBox.Show(err.Message);
                 }
-                abonentWin AbonentWin = new abonentWin();
-                AbonentWin.ShowDialog();
             }
             else MessageBox.Show("Выберите желаемый тариф", "Изменение тарифа", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы действительно хотите выйти из приложения?", "Выход", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                Close();
+            }
         }
     }
 }

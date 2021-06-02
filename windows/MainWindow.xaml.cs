@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MTS.windows;
 using static MTS.AppData;
-using static MTS.SuppClass;
 
 namespace MTS
 {
@@ -29,18 +28,25 @@ namespace MTS
         }
 
         private void registr_Click(object sender, RoutedEventArgs e)
-        {   pbPassword.Password = string.Empty;
-            tbLogin.Text = string.Empty;        
-            Hide();
-            SuppClass.registrationWin.ShowDialog();
-            
+        {
+            pbPassword.Password = string.Empty;
+            tbLogin.Text = string.Empty;
+            registrationWin registrationWin = new registrationWin();
+            Close();
+            registrationWin.ShowDialog();
+
         }
 
         private void inter_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (pbPassword != null && tbLogin != null)
+                if (tbLogin.Text == string.Empty ||
+                pbPassword.Password == string.Empty)
+                {
+                    MessageBox.Show("Заполните все поля!", "Авторизация пользователя", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
                 {
                     var user = entities.Auth.ToList().
                         Where(i => i.login == tbLogin.Text && i.password == pbPassword.Password).
@@ -51,33 +57,37 @@ namespace MTS
 
                     if (user != null && userAv != null && user.idRole == 2)
                     {
-                        logedAbonent = userAv;                     
-                        Hide();
-                        SuppClass.AbonentWin.ShowDialog();
+                        logedAbonent = userAv;
+                        abonentWin abonentWin = new abonentWin();
+                        Close();
+                        abonentWin.ShowDialog();
                         pbPassword.Password = string.Empty;
                         tbLogin.Text = string.Empty;
                     }
                     else if (user != null && user.idRole == 1)
                     {
-                        Hide();
-                        SuppClass.adminWin.ShowDialog();
+                        adminWin adminWin = new adminWin();
+                        Close();
+                        adminWin.ShowDialog();
                         pbPassword.Password = string.Empty;
                         tbLogin.Text = string.Empty;
                     }
                     else MessageBox.Show("Пользователь не найден, проверьте правилность введённых данных!", "Авторизация пользователя", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 }
-                else MessageBox.Show("Заполните все поля!", "Авторизация пользователя", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception m)
             {
                 MessageBox.Show(m.Message);
-                throw;
+                
             }
-        }
-
-        private void Close_Click(object sender, RoutedEventArgs e)
+        }       
+        private void Close_Click(object sender, EventArgs e)
         {
-            Close();
+            if (MessageBox.Show("Вы действительно хотите выйти из приложения?", "Выход", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                Close();
+            }
         }
     }
 }

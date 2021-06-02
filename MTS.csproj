@@ -64,10 +64,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SuppClass.cs" />
     <Compile Include="ValidationClass.cs" />
+    <Compile Include="windows\addTarifWin.xaml.cs">
+      <DependentUpon>addTarifWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\adminWin.xaml.cs">
       <DependentUpon>adminWin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\editTarifWin.xaml.cs">
+      <DependentUpon>editTarifWin.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\EditWin.xaml.cs">
       <DependentUpon>EditWin.xaml</DependentUpon>
@@ -83,7 +88,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="windows\addTarifWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="windows\adminWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\editTarifWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

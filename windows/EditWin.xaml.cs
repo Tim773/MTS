@@ -37,9 +37,9 @@ namespace MTS.windows
         }
         private void editSub_Click(object sender, RoutedEventArgs e)
         {           
-            if (tbLname.Text == null ||
-                tbName.Text == null ||
-                tbNumber.Text == null ||
+            if (tbLname.Text == string.Empty ||
+                tbName.Text == string.Empty ||
+                tbNumber.Text == string.Empty ||
                cbTarif.SelectedItem == null)
             {
                 MessageBox.Show("Вы указали не все данные", "Регистрация абоента", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -56,6 +56,13 @@ namespace MTS.windows
             {
                 MessageBox.Show("В поле номера присутствуют недопустимые символы", "Регистрация абоента", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
+            else if (selectedAbonents.name == tbName.Text &&
+                        selectedAbonents.lName == tbLname.Text &&
+                        selectedAbonents.number == tbNumber.Text &&
+                        selectedAbonents.idTarif == cbTarif.SelectedIndex + 1)
+            {
+                MessageBox.Show("Изменения не были внесены", "Редактирование абоента", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
             else
             {
                 try
@@ -67,8 +74,7 @@ namespace MTS.windows
                 }
                 catch (Exception err)
                 {
-                    MessageBox.Show(err.Message);
-                    throw;
+                    MessageBox.Show(err.Message);                    
                 }
                 tbLname.Text = string.Empty;
                 tbName.Text = string.Empty;
@@ -79,16 +85,25 @@ namespace MTS.windows
                 Close();
             }
         }
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы действительно хотите выйти из приложения?", "Выход", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                Close();
+            }
+        }
 
         private void editCan_Click(object sender, RoutedEventArgs e)
         {
+            adminWin adminWin = new adminWin();
             Close();
+            adminWin.ShowDialog();
         }
 
         private void cbTarif_Loaded(object sender, RoutedEventArgs e)
         {
             var tarif = entities.tarifs;
             cbTarif.ItemsSource = tarif.ToList();
-        }
+        }        
     }
 }

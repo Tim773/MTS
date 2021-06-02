@@ -9,11 +9,21 @@
         Height="400" 
         Width="350" 
         ResizeMode="NoResize" 
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
     <Grid>
         <ScrollViewer>
             <StackPanel>
-
+                <Button Style="{StaticResource btnStyle}"
+                        x:Name="Close"
+                        Content="X"
+                        Width="20"
+                        Height="20"
+                        Margin=" 5"
+                        Click="Close_Click"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                        />
                 <Image Source="/mts_logo.jpg"
                            Width="130"
                            HorizontalAlignment="Center"/>

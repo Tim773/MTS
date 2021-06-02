@@ -55,6 +55,7 @@
     <EntitySetMapping Name="tarifs">
       <EntityTypeMapping TypeName="MTS_dbModel.tarifs">
         <MappingFragment StoreEntitySet="tarifs">
+          <ScalarProperty Name="avaluable" ColumnName="avaluable" />
           <ScalarProperty Name="idTarif" ColumnName="idTarif" />
           <ScalarProperty Name="nameTarif" ColumnName="nameTarif" />
           <ScalarProperty Name="count" ColumnName="count" />

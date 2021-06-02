@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Тимошка\source\repos\MTS\App.xaml
-6-1602844867
+8-1168615759
 21750853300
-22-89484456
+23-466054792
 18-1636888799
-Style\StyleDictionary.xaml;windows\abonentWin.xaml;windows\adminWin.xaml;windows\EditWin.xaml;windows\MainWindow.xaml;windows\registrationWin.xaml;
+Style\StyleDictionary.xaml;windows\abonentWin.xaml;windows\addTarifWin.xaml;windows\adminWin.xaml;windows\editTarifWin.xaml;windows\EditWin.xaml;windows\MainWindow.xaml;windows\registrationWin.xaml;
 
-True
+False
 

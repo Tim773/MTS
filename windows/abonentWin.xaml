@@ -10,8 +10,18 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
-        >
+        WindowStyle="None">
     <Grid>
+        <Button Style="{StaticResource btnStyle}"
+                        x:Name="Close"
+                        Content="X"
+                        Width="20"
+                        Height="20"
+                        Margin=" 5"
+                        Click="Close_Click"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                        />
         <StackPanel>
             <Image Source="/mts_logo.jpg"
                    Width="130"

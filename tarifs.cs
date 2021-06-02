@@ -26,6 +26,7 @@ namespace MTS
         public int minuts { get; set; }
         public int sms { get; set; }
         public double gb { get; set; }
+        public string avaluable { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<abonents> abonents { get; set; }
